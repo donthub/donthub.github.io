@@ -1,0 +1,7 @@
+#home, #join, #room, #raise_hand, #lower_hand {
+    display: none;
+}
+
+#error {
+    color: red;
+}

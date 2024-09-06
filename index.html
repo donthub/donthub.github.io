@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Raise Hand</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Raise hand app</h1>
+
+    <div>
+        <label for="name">Name: </label>
+        <input type="text" id="name" />
+        <span>#</span><span id="client_id"></span>
+    </div>
+
+    <div id="home">
+        <div>
+            <button id="create">Create room</button>
+        </div>
+        <div>
+            <label for="home_code">Room code: </label>
+            <input type="text" id="home_code" name="code" />
+            <button id="join_manually">Join room</button>
+        </div>
+    </div>
+
+    <div id="join">
+        <div>
+            <p>
+                <span>Room code: </span>
+                <span id="join_code"></span>
+            </p>
+        </div>
+        <div>
+            <input type="submit" id="join_by_invite" value="Join room" />
+        </div>
+    </div>
+
+    <div id="room">
+        <div>
+            <p>
+                <span>Room code: </span>
+                <span id="room_code"></span>
+            </p>
+        </div>
+        <div id="queue">
+            <p>Queue:</p>
+            <ul>
+            </ul>
+        </div>
+        <div>
+            <button id="raise_hand">Raise hand</button>
+            <button id="lower_hand">Lower hand</button>
+        </div>
+        <div>
+            <button id="leave">Leave room</button>
+        </div>
+    </div>
+
+    <div id="error"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
