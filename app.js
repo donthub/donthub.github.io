@@ -2,6 +2,7 @@ const timeoutMillis = 15 * 60 * 1000;
 const messages = [];
 let previousSeqId;
 let seqId;
+let joinTime;
 
 function generateCode() {
     return String(Math.round(Math.random() * 1000 + 1)).padStart(4, '0');
@@ -86,6 +87,7 @@ function enterRoom() {
     $('#home').css('display', 'none');
     $('#join').css('display', 'none');
     $('#room').css('display', 'block');
+    joinTime = Date.now();
     send('JOIN');
     receive(true);
 
@@ -144,6 +146,10 @@ function refreshQueue() {
     $('#queue ul').empty();
     let queue = [];
     for (const message of messages) {
+        if (message.timestamp >= joinTime) {
+            $('#queue').css('display', 'block');
+            $('#loading').css('display', 'none');
+        }
         if (Date.now() - message.timestamp > timeoutMillis) {
             continue;
         }
