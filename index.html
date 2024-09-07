@@ -23,12 +23,16 @@
 
     <div id="home">
         <div>
-            <button id="create">Create room</button>
-        </div>
-        <div>
-            <label for="home_code">Room code: </label>
-            <input type="text" id="home_code" name="code" />
-            <button id="join_manually">Join room</button>
+            <ul>
+                <li>
+                    <button id="create">Create room</button>
+                    <span>or</span>
+                </li>
+                <li>
+                    <button id="join_manually">Join room</button>
+                    <input type="text" id="home_code" placeholder="Room code" />
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -53,16 +57,23 @@
         </div>
         <div id="loading">Loading...</div>
         <div id="queue">
-            <p>Queue:</p>
+            <p>
+                <span>Queue: </span>
+            </p>
             <ul>
             </ul>
         </div>
         <div>
-            <button id="raise_hand">Raise hand</button>
-            <button id="lower_hand">Lower hand</button>
+            <p>
+                <button id="raise_hand">Raise hand</button>
+                <button id="lower_hand">Lower hand</button>
+            </p>
         </div>
         <div>
-            <button id="leave">Leave room</button>
+            <hr />
+            <p>
+                <button id="leave">Leave room</button>
+            </p>
         </div>
     </div>
 
