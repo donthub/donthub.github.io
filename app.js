@@ -116,13 +116,14 @@ function receive(isFirst) {
     });
 }
 
-function send(type) {
+function send(type, callback) {
     const code = localStorage.getItem('code');
     $.post(`https://demo.httprelay.io/mcast/RaiseHand${code}`, JSON.stringify({
         client: getClient(),
         type: type,
         timestamp: Date.now()
-    }));
+    }))
+    .always(callback);
 }
 
 function processMessage(messageString) {
@@ -198,8 +199,9 @@ function lowerHand() {
 }
 
 function leaveRoom() {
-    send('LEAVE');
-    window.location = window.location.href.split('?')[0];
+    send('LEAVE', function() {
+        window.location = window.location.href.split('?')[0];
+    });
 }
 
 $(document).ready(function () {
