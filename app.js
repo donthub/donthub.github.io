@@ -3,6 +3,7 @@ const messages = [];
 let previousSeqId;
 let seqId;
 let joinTime;
+let lastRefresh;
 
 function generateCode() {
     return String(Math.round(Math.random() * 1000 + 1)).padStart(4, '0');
@@ -156,19 +157,27 @@ function refreshQueue() {
         }
         if (message.type === 'RAISE') {
             if (!isRaised(queue, message.client)) {
-                queue.push(message.client);
+                queue.push(message);
             }
             continue;
         }
         if (message.type === 'LOWER' || message.type === 'LEAVE') {
-            queue = queue.filter(client => client !== message.client);
+            queue = queue.filter(queueMessage => queueMessage.client !== message.client);
         }
     }
 
     $('#queue ul').empty();
-    for (const client of queue) {
-        const item = $('<li>').text(client);
+    playSound = false;
+    for (const queueMessage of queue) {
+        const item = $('<li>').text(queueMessage.client);
         $('#queue ul').append(item);
+        if (queueMessage.timestamp > lastRefresh) {
+            playSound = true;
+        }
+    }
+
+    if (playSound) {
+        $('#sound')[0].play();
     }
 
     const client = getClient();
@@ -179,11 +188,13 @@ function refreshQueue() {
         $('#lower_hand').css('display', 'none');
         $('#raise_hand').css('display', 'block');
     }
+
+    lastRefresh = Date.now();
 }
 
 function isRaised(queue, client) {
-    for (let queueClient of queue) {
-        if (queueClient === client) {
+    for (let queueMessage of queue) {
+        if (queueMessage.client === client) {
             return true;
         }
     }
